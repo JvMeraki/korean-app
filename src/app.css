@@ -1,0 +1,69 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Pretendard Web Font (SIL Open Font License) */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+
+@theme {
+  /* Override default sans font */
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
+  --color-korea-red: #CD2E3A;
+  --color-korea-blue: #0F64CD;
+  --color-korea-black: #111111;
+  --color-korea-white: #FDFDFD;
+
+  /* Semantic Theme Variables */
+  --color-surface-bg: var(--theme-surface-bg);
+  --color-surface-alt: var(--theme-surface-alt);
+  --color-surface-card: var(--theme-surface-card);
+  
+  --color-border-base: var(--theme-border-base);
+  --color-border-light: var(--theme-border-light);
+  
+  --color-text-main: var(--theme-text-main);
+  --color-text-muted: var(--theme-text-muted);
+}
+
+@layer base {
+  :root {
+    --theme-surface-bg: var(--color-korea-white);
+    --theme-surface-alt: var(--color-gray-50);
+    --theme-surface-card: var(--color-white);
+    
+    --theme-border-base: var(--color-gray-200);
+    --theme-border-light: var(--color-gray-100);
+    
+    --theme-text-main: var(--color-gray-900);
+    --theme-text-muted: var(--color-gray-500);
+  }
+
+  :root.dark {
+    --theme-surface-bg: var(--color-slate-900);
+    --theme-surface-alt: var(--color-slate-900); /* Some places use slate-900 for alt */
+    --theme-surface-card: var(--color-slate-800);
+    
+    --theme-border-base: var(--color-gray-700);
+    --theme-border-light: var(--color-gray-700);
+    
+    --theme-text-main: var(--color-white);
+    --theme-text-muted: var(--color-gray-400);
+  }
+
+  body {
+    @apply bg-surface-bg text-text-main antialiased;
+  }
+
+  /* Temporary class added via JS during theme toggle for a cinematic fade */
+  .theme-transition,
+  .theme-transition *,
+  .theme-transition *:before,
+  .theme-transition *:after {
+    transition: background-color 500ms ease-in-out, 
+                border-color 500ms ease-in-out, 
+                color 500ms ease-in-out, 
+                fill 500ms ease-in-out, 
+                stroke 500ms ease-in-out !important;
+    transition-delay: 0 !important;
+  }
+}
