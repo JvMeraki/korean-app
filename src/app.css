@@ -1,8 +1,8 @@
-@import "tailwindcss";
-@custom-variant dark (&:where(.dark, .dark *));
-
 /* Pretendard Web Font (SIL Open Font License) */
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   /* Override default sans font */
