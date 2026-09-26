@@ -190,7 +190,10 @@
                    index === $session.currentKeyIndex ? 'border-korea-red text-korea-red shadow-sm bg-red-50 dark:bg-red-900/20' : 
                    'border-border-base text-text-muted'}">
                   {#if isError && wrongKey}
-                    <span class="line-through opacity-80">{wrongKey.toUpperCase()}</span>
+                    <span class="flex items-center gap-1.5">
+                      <span class="line-through opacity-80">{wrongKey.toUpperCase()}</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="opacity-90"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/><line x1="18" y1="9" x2="12" y2="15"/><line x1="12" y1="9" x2="18" y2="15"/></svg>
+                    </span>
                   {:else if isShift}
                     <span class="text-xs mr-1 {index === $session.currentKeyIndex ? 'text-yellow-600 dark:text-yellow-400' : 'opacity-60'}">⇧</span> {expectedKey.toUpperCase()}
                   {:else}

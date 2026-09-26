@@ -53,9 +53,17 @@
         <div 
           role="button" tabindex="-1" on:pointerdown={(e) => { e.preventDefault(); onVirtualKey('Backspace'); }}
           class="flex items-center justify-center p-1.5 sm:p-2 rounded-lg border-2 shadow-sm transition-all duration-75 select-none cursor-pointer px-2 sm:px-8 ml-1 sm:ml-2 active:scale-90
-          {activeKeys.has('backspace') ? 'bg-gray-200 dark:bg-gray-700 scale-95' : 'bg-surface-card border-border-base text-text-muted'}
+          {activeKeys.has('backspace') ? 'bg-gray-200 dark:bg-gray-700 scale-95' : 
+           errorKey !== null ? 'bg-red-100 dark:bg-red-900/60 border-korea-red text-korea-red dark:text-red-400 animate-pulse ring-2 ring-korea-red ring-offset-1 dark:ring-offset-slate-900' : 
+           'bg-surface-card border-border-base text-text-muted'}
         ">
-          <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider">Back</span>
+          <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1">
+            {#if errorKey !== null}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/><line x1="18" y1="9" x2="12" y2="15"/><line x1="12" y1="9" x2="18" y2="15"/></svg>
+            {:else}
+              Back
+            {/if}
+          </span>
         </div>
       {/if}
 
