@@ -45,6 +45,7 @@
   "learn_interactive_title": "Motor de Composición",
   "learn_interactive_desc": "Observa cómo se construye una sílaba completa a partir de teclas individuales.",
   "learn_interactive_empty": "Escribe una sílaba coreana válida.",
+  "learn_interactive_try_examples": "Haz clic en un ejemplo:",
   "footer_copyright": "© {year} Hangeul Type Lab.",
   "footer_repo": "Repositorio en GitHub",
   "footer_version": "Versión {version} (MVP)",

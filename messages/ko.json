@@ -45,6 +45,7 @@
   "learn_interactive_title": "조합 엔진",
   "learn_interactive_desc": "개별 키보드 입력이 어떻게 완전한 음절로 조합되는지 확인하세요.",
   "learn_interactive_empty": "유효한 한글 음절을 입력하세요.",
+  "learn_interactive_try_examples": "예제를 클릭해보세요:",
   "footer_copyright": "© {year} Hangeul Type Lab.",
   "footer_repo": "GitHub 저장소",
   "footer_version": "버전 {version} (MVP)",

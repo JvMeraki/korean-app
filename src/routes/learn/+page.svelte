@@ -84,25 +84,26 @@
     <h2 class="text-2xl font-black text-text-main mb-4">{m.learn_interactive_title()}</h2>
     <p class="text-text-muted mb-8 max-w-xl mx-auto">{m.learn_interactive_desc()}</p>
 
-    <div class="max-w-[200px] mx-auto mb-6">
-      <input 
-        type="text" 
-        value={inputText}
-        on:input={handleInput}
-        placeholder="한"
-        class="w-full text-center text-6xl font-black bg-surface-alt text-text-main border-2 border-border-base rounded-2xl py-6 outline-none focus:border-korea-blue focus:ring-4 focus:ring-blue-500/20 transition-all shadow-inner"
-      />
+    <div class="max-w-[200px] mx-auto mb-10">
+      <div class="w-full text-center text-7xl font-black bg-surface-alt text-text-main border-2 border-border-base rounded-2xl py-6 shadow-sm select-none">
+        {inputText || '한'}
+      </div>
     </div>
     
-    <div class="flex flex-wrap justify-center gap-2 mb-16">
-      {#each ['한', '글', '안', '녕', '빵', '읽'] as preset}
-        <button 
-          on:click={() => inputText = preset}
-          class="px-4 py-2 bg-surface-alt hover:bg-border-light border border-border-base rounded-xl font-bold text-text-main transition-colors text-lg"
-        >
-          {preset}
-        </button>
-      {/each}
+    <div class="mb-16">
+      <p class="text-sm font-bold text-korea-blue dark:text-blue-400 uppercase tracking-widest mb-4">
+        {m.learn_interactive_try_examples()}
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        {#each ['한', '글', '안', '녕', '빵', '읽'] as preset}
+          <button 
+            on:click={() => inputText = preset}
+            class="px-5 py-3 bg-surface-card hover:bg-surface-alt hover:-translate-y-1 border-2 {inputText === preset ? 'border-korea-blue text-korea-blue shadow-md' : 'border-border-base text-text-main hover:border-border-light'} rounded-xl font-bold transition-all text-xl"
+          >
+            {preset}
+          </button>
+        {/each}
+      </div>
     </div>
 
     {#if decomposed}

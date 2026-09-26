@@ -45,6 +45,7 @@
   "learn_interactive_title": "Composition Engine",
   "learn_interactive_desc": "See how a full syllable is constructed from raw keyboard inputs.",
   "learn_interactive_empty": "Type a valid Korean syllable.",
+  "learn_interactive_try_examples": "Try clicking an example:",
   "footer_copyright": "© {year} Hangeul Type Lab.",
   "footer_repo": "GitHub Repository",
   "footer_version": "Version {version} (MVP)",
