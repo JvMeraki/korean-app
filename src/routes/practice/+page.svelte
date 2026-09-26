@@ -107,14 +107,39 @@
       activeKeys = activeKeys;
     }
   }
+
+  // Handle mobile virtual keyboard toggles
+  let isVirtualShiftActive = false;
+  $: activeShift = isShiftActive || isVirtualShiftActive;
+
+  function handleVirtualKey(key: string) {
+    if (key === 'Backspace') {
+      session.handleBackspace();
+      return;
+    }
+    if (key === 'Shift') {
+      isVirtualShiftActive = !isVirtualShiftActive;
+      return;
+    }
+
+    // It's a character or space
+    const inputKey = activeShift && key !== ' ' ? key.toUpperCase() : key.toLowerCase();
+    session.handleInput(inputKey);
+
+    // Auto-disable virtual shift after 1 keypress (like mobile keyboards)
+    if (isVirtualShiftActive) {
+      isVirtualShiftActive = false;
+    }
+  }
+
   $: hasError = $session.currentTypedKeys.length > $session.currentKeyIndex;
   $: errorKey = hasError ? $session.currentTypedKeys[$session.currentKeyIndex].toLowerCase() : null;
 </script>
 
 <svelte:window on:keydown={handleKeydown} on:keyup={handleKeyup} />
 
-<div class="w-full flex flex-col items-center gap-10 mt-6">
-  <div class="text-center space-y-6 w-full max-w-xl">
+<div class="w-full flex flex-col items-center gap-10 mobile-landscape:gap-2 mt-6 mobile-landscape:mt-1">
+  <div class="text-center space-y-6 mobile-landscape:space-y-2 w-full max-w-xl">
     <!-- Live Stats -->
     <div class="flex justify-between items-center w-full px-4 text-sm text-gray-500 font-semibold tracking-wide">
       <span>{m.practice_errors()}: <span class="text-korea-red">{$session.errors}</span></span>
@@ -132,20 +157,20 @@
     </div>
 
     <!-- Active Area -->
-    <div class="flex flex-col items-center justify-center w-full min-h-[16rem] bg-surface-card border border-border-base rounded-3xl p-8 shadow-sm">
+    <div class="flex flex-col items-center justify-center w-full min-h-[16rem] mobile-landscape:min-h-[8rem] bg-surface-card border border-border-base rounded-3xl p-8 mobile-landscape:p-3 shadow-sm">
       {#if $currentExercise}
-        <div class="space-y-6 w-full">
+        <div class="space-y-6 mobile-landscape:space-y-2 w-full">
           <p class="text-gray-500 dark:text-gray-400 uppercase tracking-widest text-xs font-bold">{m.practice_title()}</p>
           
-          <div class="flex flex-col items-center gap-4">
+          <div class="flex flex-col items-center gap-4 mobile-landscape:gap-1">
             <!-- Target word (Reference) -->
-            <span class="text-5xl font-black select-none tracking-widest transition-colors duration-200
+            <span class="text-5xl mobile-landscape:text-3xl font-black select-none tracking-widest transition-colors duration-200
               {$session.currentTypedKeys.length > $session.currentKeyIndex ? 'text-korea-red opacity-80' : 'text-text-muted opacity-40'}">
               {$currentExercise.target}
             </span>
             
             <!-- Live composing word -->
-            <span class="text-7xl font-black tracking-widest min-h-[5rem] transition-all duration-300 transform
+            <span class="text-7xl mobile-landscape:text-4xl font-black tracking-widest min-h-[5rem] mobile-landscape:min-h-[3rem] transition-all duration-300 transform
               {$session.isTransitioning ? 'text-green-500 dark:text-green-400 scale-110 drop-shadow-lg' : 
                $session.currentTypedKeys.length > $session.currentKeyIndex ? 'text-korea-red' : 'text-korea-blue dark:text-blue-400 scale-100'}"
             >
@@ -153,7 +178,7 @@
             </span>
           </div>
           
-          <div class="flex justify-center gap-2 mt-4 min-h-[2.5rem] flex-wrap">
+          <div class="flex justify-center gap-2 mt-4 mobile-landscape:mt-1 min-h-[2.5rem] flex-wrap">
             {#if $showHints}
               {#each $currentExercise.expectedSequence as expectedKey, index}
                 {@const isShift = expectedKey === expectedKey.toUpperCase() && /[A-Z]/.test(expectedKey)}
@@ -180,7 +205,7 @@
     </div>
   </div>
 
-  <Keyboard {activeKeys} expectedKey={$expectedNextKey} {errorKey} {isShiftActive} showHints={$showHints} />
+  <Keyboard {activeKeys} expectedKey={$expectedNextKey} {errorKey} isShiftActive={activeShift} showHints={$showHints} onVirtualKey={handleVirtualKey} />
 </div>
 
 {#if $session.isCompleted}

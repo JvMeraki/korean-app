@@ -2,6 +2,7 @@
   import '../app.css';
   import Navbar from '@ui/Navbar.svelte';
   import Footer from '@ui/Footer.svelte';
+  import BottomNav from '@ui/BottomNav.svelte';
   import { currentLang } from '@stores/lang';
 </script>
 
@@ -18,7 +19,7 @@
 </svelte:head>
 
 {#key $currentLang}
-<div class="min-h-screen flex flex-col bg-surface-bg transition-colors duration-300">
+<div class="min-h-screen flex flex-col bg-surface-bg transition-colors duration-300 pb-16 sm:pb-0">
   <Navbar />
 
   <main class="grow flex flex-col w-full mx-auto">
@@ -26,5 +27,6 @@
   </main>
 
   <Footer />
+  <BottomNav />
 </div>
 {/key}

@@ -3,6 +3,7 @@
 
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+@custom-variant mobile-landscape (@media (orientation: landscape) and (max-height: 600px));
 
 @theme {
   /* Override default sans font */
